@@ -5,23 +5,23 @@
 class Matriz
 {
 private:
-    int linhas;
-    int colunas;
-    int **vet_matriz;
+    int rows;
+    int columns;
+    int **vet_matrix;
 
-    bool dimensaoIgual( Matriz b) {return linhas == b.getLinhas() && colunas == b.getColunas();}
+    bool equal_dimensions( Matriz b) {return rows == b.getRows() && columns == b.getColumns();}
 public:
-    Matriz(const int linhas, const int colunas);
-    int getColunas() { return colunas; }
-    int getLinhas() const { return linhas; }
-    int getElement(int &x, int&y) {return vet_matriz[x][y];}
-    void set(int x, int y, int valor);
-    Matriz inverter();
-    void preencher();
+    Matriz(const int rows, const int columns);
+    int getColumns() { return columns; }
+    int getRows() const { return rows; }
+    int getElement(int &x, int&y) {return vet_matrix[x][y];}
+    void set(int x, int y, int value);
+    Matriz transposed();
+    void fill();
 
     Matriz operator +(Matriz b);
 
-    void mostrar();
+    void show();
 };
 
 #endif // MATRIZ_H
