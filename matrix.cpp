@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-matriz::matriz(const int linhas , const int colunas )
+Matriz::Matriz(const int linhas , const int colunas )
 {
 
     this->linhas = linhas;
@@ -13,14 +13,14 @@ matriz::matriz(const int linhas , const int colunas )
     for(int i = 0; i < this->colunas; i++)
         vet_matriz[i] = new int[this->linhas]; //alocando linhas
 }
-void matriz::set(int x, int y, int valor) //
+void Matriz::set(int x, int y, int valor) //
 {
     vet_matriz[x][y] = valor;
 }
 
-matriz matriz::inverter()
+Matriz Matriz::inverter()
 {
-    matriz inverso(colunas, linhas);
+    Matriz inverso(colunas, linhas);
 
     for(int i = 0; i < colunas; i++)
         for(int j = 0; j < linhas; j++)
@@ -28,7 +28,7 @@ matriz matriz::inverter()
 
     return inverso;
 }
-void matriz::preencher()
+void Matriz::preencher()
 {
     int k = 0;
     for(int i = 0; i < linhas ; i++)
@@ -41,11 +41,11 @@ void matriz::preencher()
     }
 }
 
-matriz matriz::operator +(matriz b)
+Matriz Matriz::operator +(Matriz b)
 {
     if(dimensaoIgual(b))
     {
-        matriz c(linhas,colunas);
+        Matriz c(linhas,colunas);
 
         for(int i = 0; i < linhas; i++)
         {
@@ -61,7 +61,7 @@ matriz matriz::operator +(matriz b)
 
 }
 
-void matriz::mostrar()
+void Matriz::mostrar()
 {
     for(int i = 0; i < linhas; i++)
     {
