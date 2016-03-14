@@ -2,56 +2,56 @@
 #include <iostream>
 using namespace std;
 
-Matriz::Matriz(const int linhas , const int colunas )
+Matriz::Matriz(const int rows , const int columns )
 {
 
-    this->linhas = linhas;
-    this->colunas = colunas;
-    vet_matriz = new int*[this->colunas];//alocando colunas
+    this->rows = rows;
+    this->columns = columns;
+    vet_matrix = new int*[this->columns];//Columns allocation
 
 
-    for(int i = 0; i < this->colunas; i++)
-        vet_matriz[i] = new int[this->linhas]; //alocando linhas
+    for(int i = 0; i < this->columns; i++)
+        vet_matrix[i] = new int[this->rows]; //Rows allocation
 }
-void Matriz::set(int x, int y, int valor) //
+void Matriz::set(int x, int y, int value) //
 {
-    vet_matriz[x][y] = valor;
+    vet_matrix[x][y] = value;
 }
 
-Matriz Matriz::inverter()
+Matriz Matriz::transposed()
 {
-    Matriz inverso(colunas, linhas);
+    Matriz aux(columns, rows);
 
-    for(int i = 0; i < colunas; i++)
-        for(int j = 0; j < linhas; j++)
-            inverso.set(j,i,vet_matriz[i][j]);
+    for(int i = 0; i < columns; i++)
+        for(int j = 0; j < rows; j++)
+            aux.set(j,i,vet_matrix[i][j]);
 
-    return inverso;
+    return aux;
 }
-void Matriz::preencher()
+void Matriz::fill()
 {
     int k = 0;
-    for(int i = 0; i < linhas ; i++)
+    for(int i = 0; i < rows ; i++)
     {
-        for(int j = 0; j < colunas; j++){
+        for(int j = 0; j < columns; j++){
             cout << "[" << i << "] " << "[" << j << "] = ";
             cin >> k;
-            vet_matriz[j][i] = k;
+            vet_matrix[j][i] = k;
         }
     }
 }
 
 Matriz Matriz::operator +(Matriz b)
 {
-    if(dimensaoIgual(b))
+    if(equal_dimensions(b))
     {
-        Matriz c(linhas,colunas);
+        Matriz c(rows, columns);
 
-        for(int i = 0; i < linhas; i++)
+        for(int i = 0; i < rows; i++)
         {
-            for(int j = 0; j < colunas; j++)
+            for(int j = 0; j < columns; j++)
             {
-                c.set(i, j, vet_matriz[i][j] + b.getElement(i, j));
+                c.set(i, j, vet_matrix[i][j] + b.getElement(i, j));
             }
         }
         return c;
@@ -61,13 +61,13 @@ Matriz Matriz::operator +(Matriz b)
 
 }
 
-void Matriz::mostrar()
+void Matriz::show()
 {
-    for(int i = 0; i < linhas; i++)
+    for(int i = 0; i < rows; i++)
     {
-        for(int j = 0; j < colunas; j++)
+        for(int j = 0; j < columns; j++)
 
-            cout << vet_matriz[j][i] << "\t";
+            cout << vet_matrix[j][i] << "\t";
 
         cout << endl;
     }
