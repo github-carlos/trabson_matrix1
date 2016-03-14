@@ -13,11 +13,11 @@ public:
     int getElement(int line, int column) const { return _mtx[line][column]; }
     //void setColumn(int &value);
     //void setLine (int &value);
-    void define_size(int &lines, int &columns);
+    void define_size(int lines, int columns);
     void set(int x, int y, int value) { _mtx[x][y] = value; }
-    Matrix operator+(Matrix &B);
-    Matrix operator-(Matrix &B);
-    Matrix operator*(Matrix &B);
+    Matrix operator+(Matrix B);
+    Matrix operator-(Matrix B);
+    Matrix operator*(Matrix B);
     Matrix operator*(int);
     Matrix transposta();
     Matrix potencia(Matrix &B);
