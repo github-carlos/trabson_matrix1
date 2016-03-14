@@ -2,24 +2,24 @@
 #define MATRIZ_H
 
 
-class matriz
+class Matriz
 {
 private:
     int linhas;
     int colunas;
     int **vet_matriz;
 
-    bool dimensaoIgual( matriz b) {return linhas == b.getLinhas() && colunas == b.getColunas();}
+    bool dimensaoIgual( Matriz b) {return linhas == b.getLinhas() && colunas == b.getColunas();}
 public:
-    matriz(const int linhas, const int colunas);
+    Matriz(const int linhas, const int colunas);
     int getColunas() { return colunas; }
     int getLinhas() const { return linhas; }
     int getElement(int &x, int&y) {return vet_matriz[x][y];}
     void set(int x, int y, int valor);
-    matriz inverter();
+    Matriz inverter();
     void preencher();
 
-    matriz operator +(matriz b);
+    Matriz operator +(Matriz b);
 
     void mostrar();
 };
