@@ -22,8 +22,8 @@ public:
     int getElement(int &x, int&y) {return vet_matrix[x][y];}
 
     void set(int x, int y, int value);
-    void show();
-    
+    void fill();
+
     Matrix transposed();
     Matrix operator +(Matrix b);
     Matrix operator-(Matrix b);
@@ -40,7 +40,7 @@ public:
     bool upperTriangular();
     bool lowerTriangular(Matrix &b);
 
-    
+
 };
 
 #endif // MATRIZ_H
