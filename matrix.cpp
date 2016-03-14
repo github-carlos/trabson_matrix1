@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-Matriz::Matriz(const int rows , const int columns )
+Matrix::Matrix(const int rows , const int columns )
 {
 
     this->rows = rows;
@@ -13,14 +13,14 @@ Matriz::Matriz(const int rows , const int columns )
     for(int i = 0; i < this->columns; i++)
         vet_matrix[i] = new int[this->rows]; //Rows allocation
 }
-void Matriz::set(int x, int y, int value) //
+void Matrix::set(int x, int y, int value) //
 {
     vet_matrix[x][y] = value;
 }
 
-Matriz Matriz::transposed()
+Matrix Matrix::transposed()
 {
-    Matriz aux(columns, rows);
+    Matrix aux(columns, rows);
 
     for(int i = 0; i < columns; i++)
         for(int j = 0; j < rows; j++)
@@ -28,7 +28,7 @@ Matriz Matriz::transposed()
 
     return aux;
 }
-void Matriz::fill()
+void Matrix::fill()
 {
     int k = 0;
     for(int i = 0; i < rows ; i++)
@@ -41,11 +41,11 @@ void Matriz::fill()
     }
 }
 
-Matriz Matriz::operator +(Matriz b)
+Matrix Matrix::operator +(Matrix b)
 {
     if(equal_dimensions(b))
     {
-        Matriz c(rows, columns);
+        Matrix c(rows, columns);
 
         for(int i = 0; i < rows; i++)
         {
@@ -61,14 +61,3 @@ Matriz Matriz::operator +(Matriz b)
 
 }
 
-void Matriz::show()
-{
-    for(int i = 0; i < rows; i++)
-    {
-        for(int j = 0; j < columns; j++)
-
-            cout << vet_matrix[j][i] << "\t";
-
-        cout << endl;
-    }
-}
