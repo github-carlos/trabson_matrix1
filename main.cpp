@@ -2,6 +2,17 @@
 #include <iostream>
 #include "matriz.h"
 using namespace std;
+void show(Matrix a)
+{
+    for(int i = 0; i < a.getRows(); i++)
+    {
+        for(int j = 0; j < a.getColumns(); j++)
+
+            cout << a.getElement(i, j) << "\t";
+
+        cout << endl;
+    }
+}
 int main()
 {
     int c;
@@ -19,17 +30,17 @@ int main()
         cin >> l;
     }while(l <= 0);
 
-    Matriz A(l, c);
+    Matrix A(l, c);
 
     A.fill();
 
-    A.show();
+    show(A);
 
-    Matriz result = A.transposed();
+    Matrix result = A.transposed();
 
     cout << "\t\t\nMatriz invertida\n\n";
 
-    result.show();
+    show(result);
 
     do
     {
@@ -43,16 +54,16 @@ int main()
         cin >> l;
     }while(l <= 0);
 
-    Matriz B(l, c);
+    Matrix B(l, c);
 
     B.fill();
 
-    B.show();
+    show(B);
 
     try{
         result = A + B;
         cout << "\n" << "\t\tSoma\n\n";
-        result.show();
+        show(result);
     }catch(std::string msg){    cout << msg;    }
     cout << "\n";
 
