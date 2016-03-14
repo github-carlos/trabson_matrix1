@@ -1,53 +1,27 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef MATRIZ_H
+#define MATRIZ_H
 
 
-class Matrix
+class matriz
 {
 private:
-    int **_mtx;
-    int _c;
-    int _l;
-    bool equalDimension(Matrix B);
-    bool columnsA_Equal_LinesB(Matrix &B);
-    bool square() {return _c == _l;}
+    int linhas;
+    int colunas;
+    int **vet_matriz;
+
+    bool dimensaoIgual( matriz b) {return linhas == b.getLinhas() && colunas == b.getColunas();}
 public:
-    Matrix():_mtx(0),_c(0), _l(0){}
-    ~Matrix() {delete[] _mtx; }
-    int getColumn() const { return _c; }
-    int getLine() const { return _l; }
-    int getElement(int line, int column) const { return _mtx[line][column]; }
+    matriz(const int linhas, const int colunas);
+    int getColunas() { return colunas; }
+    int getLinhas() const { return linhas; }
+    int getElement(int &x, int&y) {return vet_matriz[x][y];}
+    void set(int x, int y, int valor);
+    matriz inverter();
+    void preencher();
 
-    void define_size(int lines, int columns);
-    void set(int x, int y, int value) { _mtx[x][y] = value; }
+    matriz operator +(matriz b);
 
-    Matrix operator+(Matrix B);
-    Matrix operator-(Matrix B);
-    Matrix operator*(Matrix B);
-    bool upperTriangular();
-    bool lowerTriangular(Matrix &B);
-
-    Matrix operator*(int);
-    Matrix transpose(Matrix &B);
-
-    Matrix potencia(Matrix &B);
-
-
-    bool simetrica(Matrix &B);
-    bool identidade(Matrix &B);
-    bool igual(Matrix &B);
-    bool diferente(Matrix &B);
-    bool ortogonal();
-    bool permutacao(Matrix &B);
-
-
+    void mostrar();
 };
 
-#endif // MATRIX_H
-
-
-
-
-
-
-
+#endif // MATRIZ_H
