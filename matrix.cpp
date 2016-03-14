@@ -1,78 +1,74 @@
-#include "matrix.h"
-#include<iostream>
+#include "matriz.h"
+#include <iostream>
+using namespace std;
 
-void Matrix::define_size(int lines, int columns) {
+matriz::matriz(const int linhas , const int colunas )
+{
 
-    _l = lines;
-    _c = columns;
+    this->linhas = linhas;
+    this->colunas = colunas;
+    vet_matriz = new int*[this->colunas];//alocando colunas
 
-    _mtx = new int*[columns];
 
-    for (int i = 0; i < lines; i++)
-        _mtx[i] = new int[lines];
-
+    for(int i = 0; i < this->colunas; i++)
+        vet_matriz[i] = new int[this->linhas]; //alocando linhas
+}
+void matriz::set(int x, int y, int valor) //
+{
+    vet_matriz[x][y] = valor;
 }
 
-Matrix Matrix::transpose(Matrix &B)
+matriz matriz::inverter()
 {
-    Matrix inverso;
-    inverso.define_size(_c, _l);
-    for(int i = 0; i < _c; i++)
-        for(int j = 0; j < _l; j++)
-            inverso.set(j,i,_mtx[i][j]);
+    matriz inverso(colunas, linhas);
+
+    for(int i = 0; i < colunas; i++)
+        for(int j = 0; j < linhas; j++)
+            inverso.set(j,i,vet_matriz[i][j]);
+
     return inverso;
 }
-Matrix Matrix::operator+(Matrix B){
-    if(equalDimension(B)){
-        Matrix C;
-        C.define_size(_l, _c);
-        for(int i = 0; i < _l; i++)
-            for(int j = 0; j < _c; j++)
-                C.set(i, j, _mtx[i][j] + B.getElement(i, j));
-            return C;
+void matriz::preencher()
+{
+    int k = 0;
+    for(int i = 0; i < linhas ; i++)
+    {
+        for(int j = 0; j < colunas; j++){
+            cout << "[" << i << "] " << "[" << j << "] = ";
+            cin >> k;
+            vet_matriz[j][i] = k;
+        }
     }
-    else
-        throw  std::string("\nNao eh possivel fazer a soma.\n");
 }
-Matrix Matrix::operator-(Matrix B){
-    if(equalDimension(B)){
-        Matrix C;
-        C.define_size(_l,_c);
-        for(int i = 0; i < _l; i++)
-            for(int j = 0; j < _c;j++)
-                C.set(i, j, _mtx[i][j] - B.getElement(i, j));
-        return C;
+
+matriz matriz::operator +(matriz b)
+{
+    if(dimensaoIgual(b))
+    {
+        matriz c(linhas,colunas);
+
+        for(int i = 0; i < linhas; i++)
+        {
+            for(int j = 0; j < colunas; j++)
+            {
+                c.set(i, j, vet_matriz[i][j] + b.getElement(i, j));
+            }
+        }
+        return c;
     }
-    else
-        throw  std::string("\nNao eh possivel fazer a subtracao.\n");
+
+    throw std::string("\nNao eh possivel fazer esta soma!");
+
 }
-//Matrix Matrix::operator *(Matrix &B){
-//    if(columnsA_Equal_LinesB(B)){
-//        Matrix C;
-//        C.define_size(_l,B.getColumn());
-//        for(int i = 0; i < _l; i++)
-//            for(int j = 0; i < B.getColumn();j++)
-//                C.set(i,j, C.getElement(i,j) + _mtx[i][j] * B.getElement(i,j));
-//        return C;
-//         }
-//    else
-//        throw std::string("\nNao eh possivel fazer a multiplicacao.\n");
 
-//}
+void matriz::mostrar()
+{
+    for(int i = 0; i < linhas; i++)
+    {
+        for(int j = 0; j < colunas; j++)
 
-bool Matrix::equalDimension(Matrix B){
-    return _l == B.getLine() && _c == B.getColumn();
-}
-bool Matrix::columnsA_Equal_LinesB(Matrix &B){
-    return _c == B.getLine();
-}
-bool Matrix::upperTriangular(){
+            cout << vet_matriz[j][i] << "\t";
 
-    if(square()==true)
-        for(int i=0; i < _l; i++)
-            for(int j=0; j < i; j++)
-                if(_mtx[i][j] != 0)
-                    return false;
-                return true;
-
+        cout << endl;
+    }
 }
