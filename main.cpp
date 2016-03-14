@@ -1,51 +1,72 @@
 #include <QCoreApplication>
-#include"matrix.h"
-#include<iostream>
-
+#include <iostream>
+#include "matriz.h"
 using namespace std;
+void show(Matrix a)
+{
+    for(int i = 0; i < a.getRows(); i++)
+    {
+        for(int j = 0; j < a.getColumns(); j++)
 
+            cout << a.getElement(i, j) << "\t";
+
+        cout << endl;
+    }
+}
 int main()
 {
-    Matrix A,B,C;
-    int aux1,aux2;
+    int c;
+    int l;
+    cout << "\t\t\tM A T R I Z \n\n";
+    do
+    {
+        cout << "Quantidade de colunas: ";
+        cin >> c;
+    }while(c <= 0);
 
-    cout<<"Digite a quantidade de linhas de A: ";
-    cin>>aux1;
-    cout<<"Digite a quantidade de colunas de A: ";
-    cin>>aux2;
-    A.define_size(aux1,aux2);
-    cout<<"Digite a quantidade de linhas de B: ";
-    cin>>aux1;
-    cout<<"Digite a quantidade de colunas de B: ";
-    cin>>aux2;
-    B.define_size(aux1,aux2);
+    do
+    {
+        cout << "Quantidade de linhas: ";
+        cin >> l;
+    }while(l <= 0);
 
+    Matrix A(l, c);
 
-    for(int i=0; i<A.getLine(); i++){
-        for(int j=0; j<A.getColumn();j++){
-            cout<<"Elemento de A: "<<(i+1)<<","<<(j+1)<<": ";
-            cin>>aux1;
-            A.set(i,j,aux1);
-        }
-    }
-    for(int i=0; i<B.getLine(); i++){
-        for(int j=0; j<B.getColumn();j++){
-            cout<<"Elemento de B: "<<(i+1)<<","<<(j+1)<<": ";
-            cin>>aux1;
-            B.set(i,j,aux1);
-        }
-    }
+    A.fill();
 
-    C=A+B;
+    show(A);
 
-    for(int i=0; i<C.getLine();i++){
-        cout<<"\n";
-        for(int j=0; j<C.getColumn();j++){
-            cout<<C.getElement(i,j)<<"\t";
-        }
-    }
+    Matrix result = A.transposed();
 
+    cout << "\t\t\nMatriz invertida\n\n";
 
+    show(result);
 
+    do
+    {
+        cout << "Quantidade de colunas: ";
+        cin >> c;
+    }while(c <= 0);
 
+    do
+    {
+        cout << "Quantidade de linhas: ";
+        cin >> l;
+    }while(l <= 0);
+
+    Matrix B(l, c);
+
+    B.fill();
+
+    show(B);
+
+    try{
+        result = A + B;
+        cout << "\n" << "\t\tSoma\n\n";
+        show(result);
+    }catch(std::string msg){    cout << msg;    }
+    cout << "\n";
+
+    return 0;
 }
+
