@@ -23,9 +23,8 @@ public:
 
     void set(int x, int y, int value);
     void show();
-    Matrix transposed();
     
-
+    Matrix transposed();
     Matrix operator +(Matrix b);
     Matrix operator-(Matrix b);
     Matrix operator*(Matrix b);
