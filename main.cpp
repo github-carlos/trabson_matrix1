@@ -1,60 +1,27 @@
-#include <QCoreApplication>
-#include <iostream>
-#include "matriz.h"
-using namespace std;
-int main()
+#ifndef MATRIZ_H
+#define MATRIZ_H
+
+
+class Matriz
 {
-    int c;
-    int l;
-    cout << "\t\t\tM A T R I Z \n\n";
-    do
-    {
-        cout << "Quantidade de colunas: ";
-        cin >> c;
-    }while(c <= 0);
+private:
+    int linhas;
+    int colunas;
+    int **vet_matriz;
 
-    do
-    {
-        cout << "Quantidade de linhas: ";
-        cin >> l;
-    }while(l <= 0);
+    bool dimensaoIgual( Matriz b) {return linhas == b.getLinhas() && colunas == b.getColunas();}
+public:
+    Matriz(const int linhas, const int colunas);
+    int getColunas() { return colunas; }
+    int getLinhas() const { return linhas; }
+    int getElement(int &x, int&y) {return vet_matriz[x][y];}
+    void set(int x, int y, int valor);
+    Matriz inverter();
+    void preencher();
 
-    matriz A(l, c);
+    Matriz operator +(Matriz b);
 
-    A.preencher();
+    void mostrar();
+};
 
-    A.mostrar();
-
-    matriz result = A.inverter();
-
-    cout << "\t\t\nMatriz invertida\n\n";
-
-    result.mostrar();
-
-    do
-    {
-        cout << "Quantidade de colunas: ";
-        cin >> c;
-    }while(c <= 0);
-
-    do
-    {
-        cout << "Quantidade de linhas: ";
-        cin >> l;
-    }while(l <= 0);
-
-    matriz B(l, c);
-
-    B.preencher();
-
-    B.mostrar();
-
-    try{
-        result = A + B;
-        result.mostrar();
-    }catch(std::string msg){    cout << msg;    }
-    cout << "\n";
-    
-    return 0;
-}
-
+#endif // MATRIZ_H
