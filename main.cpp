@@ -21,15 +21,15 @@ int main()
 
     Matriz A(l, c);
 
-    A.preencher();
+    A.fill();
 
-    A.mostrar();
+    A.show();
 
-    Matriz result = A.inverter();
+    Matriz result = A.transposed();
 
     cout << "\t\t\nMatriz invertida\n\n";
 
-    result.mostrar();
+    result.show();
 
     do
     {
@@ -45,14 +45,14 @@ int main()
 
     Matriz B(l, c);
 
-    B.preencher();
+    B.fill();
 
-    B.mostrar();
+    B.show();
 
     try{
         result = A + B;
         cout << "\n" << "\t\tSoma\n\n";
-        result.mostrar();
+        result.show();
     }catch(std::string msg){    cout << msg;    }
     cout << "\n";
 
