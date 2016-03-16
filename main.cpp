@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 #include <iostream>
-#include "matriz.h"
+#include "matrix.h"
 using namespace std;
 void show(Matrix a)
 {
@@ -20,15 +20,15 @@ int main()
     cout << "\t\t\tM A T R I Z \n\n";
     do
     {
-        cout << "Quantidade de colunas: ";
-        cin >> c;
-    }while(c <= 0);
-
-    do
-    {
         cout << "Quantidade de linhas: ";
         cin >> l;
     }while(l <= 0);
+
+    do
+    {
+        cout << "Quantidade de colunas: ";
+        cin >> c;
+    }while(c <= 0);
 
     Matrix A(l, c);
 
@@ -44,15 +44,15 @@ int main()
 
     do
     {
-        cout << "Quantidade de colunas: ";
-        cin >> c;
-    }while(c <= 0);
-
-    do
-    {
         cout << "Quantidade de linhas: ";
         cin >> l;
     }while(l <= 0);
+
+    do
+    {
+        cout << "Quantidade de colunas: ";
+        cin >> c;
+    }while(c <= 0);
 
     Matrix B(l, c);
 
@@ -61,12 +61,28 @@ int main()
     show(B);
 
     try{
-        result = A + B;
-        cout << "\n" << "\t\tSoma\n\n";
+        result = A - B;
+        cout << "\n" << "\t\tSubtracao\n\n";
         show(result);
     }catch(std::string msg){    cout << msg;    }
     cout << "\n";
 
+    if(A.upperTriangular() == true)
+    {
+        cout << "Matriz Triangular superior!\n";
+    }
+    else
+    {
+        cout << "Nao eh uma Matriz Triangular Superior!\n";
+    }
+    if(A.lowerTriangular() == true)
+    {
+        cout << "Matriz Triangular inferior!\n";
+    }
+    else
+    {
+        cout << "Nao eh uma Matriz Triangular inferior!\n";
+    }
+
     return 0;
 }
-
