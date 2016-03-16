@@ -9,7 +9,7 @@ private:
     int columns;
     int **vet_matrix;
 
-    bool columnsA_Equal_LinesB(Matrix &B);
+    bool columnsA_Equal_LinesB(Matrix b){return columns == b.getRows();}
     bool square() {return columns == rows;}
     bool equal_dimensions( Matrix b) {return rows == b.getRows() && columns == b.getColumns();}
 
@@ -17,7 +17,7 @@ private:
 public:
     Matrix(const int rows, const int columns);
 
-    int getColumns() { return columns; }
+    int getColumns() const { return columns; }
     int getRows() const { return rows; }
     int getElement(int &x, int&y) {return vet_matrix[x][y];}
 
@@ -29,6 +29,8 @@ public:
     Matrix operator-(Matrix b);
     Matrix operator*(Matrix b);
     Matrix operator*(int);
+    bool upperTriangular();
+    bool lowerTriangular();
     Matrix potencia(Matrix &b);
 
     bool simetrica(Matrix &b);
@@ -37,10 +39,11 @@ public:
     bool diferente(Matrix &b);
     bool ortogonal();
     bool permutacao(Matrix &b);
-    bool upperTriangular();
-    bool lowerTriangular(Matrix &b);
+
+
 
 
 };
 
 #endif // MATRIZ_H
+
