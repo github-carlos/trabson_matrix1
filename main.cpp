@@ -38,7 +38,7 @@ int main()
 
     Matrix result = A.transposed();
 
-    cout << "\t\t\nMatriz invertida\n\n";
+    cout << "\t\t\nMatriz transposta\n\n";
 
     show(result);
 
@@ -61,27 +61,42 @@ int main()
     show(B);
 
     try{
-        result = A - B;
+        result = A * 2;
         cout << "\n" << "\t\tSubtracao\n\n";
         show(result);
     }catch(std::string msg){    cout << msg;    }
     cout << "\n";
-
-    if(A.upperTriangular() == true)
+    if(Matrix::simetrica(A))
     {
-        cout << "Matriz Triangular superior!\n";
+        cout << "Matriz Simetrica!\n";
     }
     else
     {
-        cout << "Nao eh uma Matriz Triangular Superior!\n";
+        cout << "Nao eh uma Matriz Simetrica!\n";
     }
-    if(A.lowerTriangular() == true)
+    if(A.identidade())
     {
-        cout << "Matriz Triangular inferior!\n";
+        cout << "Matriz identidade!\n";
     }
     else
     {
-        cout << "Nao eh uma Matriz Triangular inferior!\n";
+        cout << "Nao eh uma Matriz identidade!\n";
+    }
+    if(A.ortogonal() == true)
+    {
+        cout<<"Matriz ortogonal!\n";
+    }
+    else
+    {
+        cout<<"Nao eh ortogonal!\n";
+    }
+    if(A.permutacao() == true)
+    {
+        cout<<"Matriz permutacao!\n";
+    }
+    else
+    {
+        cout<<"Nao eh permutacao!\n";
     }
 
     return 0;
