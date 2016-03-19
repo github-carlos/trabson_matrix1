@@ -29,16 +29,20 @@ public:
     Matrix operator-(Matrix b);
     Matrix operator*(Matrix b);
     Matrix operator*(int);
+    bool operator ==(Matrix &b);
+    bool operator !=(Matrix &b);
     bool upperTriangular();
     bool lowerTriangular();
-    Matrix potencia(Matrix &b);
-
-    bool simetrica(Matrix &b);
-    bool identidade(Matrix &b);
     bool igual(Matrix &b);
-    bool diferente(Matrix &b);
+    bool identidade();
     bool ortogonal();
-    bool permutacao(Matrix &b);
+    bool permutacao();
+    static bool simetrica(Matrix a);
+
+
+    int potencia(int x);
+
+
 
 
 
@@ -46,4 +50,3 @@ public:
 };
 
 #endif // MATRIZ_H
-
