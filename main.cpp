@@ -17,6 +17,7 @@ int main()
 {
     int c;
     int l;
+    int po;
     cout << "\t\t\tM A T R I Z \n\n";
     do
     {
@@ -60,13 +61,17 @@ int main()
 
     show(B);
 
+    cout<<"Digite uma potencia.\n";
+    cin>>po;
+
     try{
-        result = A * 2;
+        result = A * B;
         cout << "\n" << "\t\tSubtracao\n\n";
         show(result);
+        cout<<"potencia da matriz A: "<<A.power(po)<<"\n";
     }catch(std::string msg){    cout << msg;    }
     cout << "\n";
-    if(Matrix::simetrica(A))
+    if(Matrix::symmetric(A))
     {
         cout << "Matriz Simetrica!\n";
     }
@@ -74,7 +79,7 @@ int main()
     {
         cout << "Nao eh uma Matriz Simetrica!\n";
     }
-    if(A.identidade())
+    if(A.identity())
     {
         cout << "Matriz identidade!\n";
     }
@@ -82,7 +87,7 @@ int main()
     {
         cout << "Nao eh uma Matriz identidade!\n";
     }
-    if(A.ortogonal() == true)
+    if(A.orthogonal() == true)
     {
         cout<<"Matriz ortogonal!\n";
     }
@@ -90,7 +95,7 @@ int main()
     {
         cout<<"Nao eh ortogonal!\n";
     }
-    if(A.permutacao() == true)
+    if(A.permutation() == true)
     {
         cout<<"Matriz permutacao!\n";
     }
