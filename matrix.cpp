@@ -4,31 +4,28 @@ using namespace std;
 
 Matrix::Matrix(const int rows , const int columns )
 {
-
     this->rows = rows;
     this->columns = columns;
-    vet_matrix = new int*[this->rows];//Columns allocation
+    _matrix = new int*[this->rows];
 
     for(int i = 0; i < this->rows; i++)
-        vet_matrix[i] = new int[this->columns]; //Rows allocation
+        _matrix[i] = new int[this->columns];
 }
-void Matrix::set(int x, int y, int value) //
+void Matrix::set(int x, int y, int value)
 {
-    vet_matrix[x][y] = value;
+    _matrix[x][y] = value;
 }
 
 Matrix Matrix::transposed()
 {
     Matrix aux(columns, rows);
-
     for(int i = 0; i < columns; i++)
     {
         for(int j = 0; j < rows; j++)
         {
-            aux.set(i,j,vet_matrix[j][i]);
+            aux.set(i,j,_matrix[j][i]);
         }
     }
-
     return aux;
 }
 void Matrix::fill()
@@ -39,7 +36,7 @@ void Matrix::fill()
         for(int j = 0; j < columns; j++){
             cout << "[" << i << "] " << "[" << j << "] = ";
             cin >> k;
-            vet_matrix[i][j] = k;
+            _matrix[i][j] = k;
         }
     }
 }
@@ -54,7 +51,7 @@ Matrix Matrix::operator +(Matrix b)
         {
             for(int j = 0; j < columns; j++)
             {
-                c.set(i, j, vet_matrix[i][j] + b.getElement(i, j));
+                c.set(i, j, _matrix[i][j] + b.getElement(i, j));
             }
         }
         return c;
@@ -74,7 +71,7 @@ Matrix Matrix::operator -(Matrix b)
         {
             for(int j = 0; j < columns;j++)
             {
-                c.set(i, j, vet_matrix[i][j] - b.getElement(i, j));
+                c.set(i, j, _matrix[i][j] - b.getElement(i, j));
             }
         }
         return c;
@@ -95,7 +92,7 @@ Matrix Matrix::operator *(Matrix b)
             {
                 for(int k = 0; k < columns; k++)
                 {
-                    value += vet_matrix[i][k] * b.getElement(k, j);
+                    value += _matrix[i][k] * b.getElement(k, j);
 
                 }
                 c.set(i, j, value);
@@ -108,26 +105,25 @@ Matrix Matrix::operator *(Matrix b)
 }
 Matrix Matrix::operator *(int x)
 {
-        Matrix c(rows, columns);
-
-        for(int i = 0; i < rows; i++)
+    Matrix c(rows, columns);
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < columns; j++)
         {
-            for(int j = 0; j < columns; j++)
-            {
-                c.set(i, j, vet_matrix[i][j] * x);
-            }
+            c.set(i, j, _matrix[i][j] * x);
         }
-        return c;
+    }
+    return c;
 }
 
 bool Matrix::operator ==(Matrix &b)
 {
-    return igual(b);
+    return equal(b);
 }
 
 bool Matrix::operator !=(Matrix &b)
 {
-    return !igual(b);
+    return !equal(b);
 }
 bool Matrix::upperTriangular()
 {
@@ -137,9 +133,8 @@ bool Matrix::upperTriangular()
         {
             for(int j = 0; j < i; j++)
             {
-                if(vet_matrix[i][j] != 0)
+                if(_matrix[i][j] != 0)
                     return false;
-
             }
         }
         return true;
@@ -155,7 +150,7 @@ bool Matrix::lowerTriangular()
         {
             for(int j = i + 1; j < rows; j++)
             {
-                if(vet_matrix[i][j] != 0)
+                if(_matrix[i][j] != 0)
                     return false;
            }
 
@@ -165,7 +160,7 @@ bool Matrix::lowerTriangular()
     return false;
 }
 
-bool Matrix::simetrica(Matrix a)
+bool Matrix::symmetric(Matrix a)
 {
     if(a.square())
     {
@@ -177,25 +172,23 @@ bool Matrix::simetrica(Matrix a)
     return false;
 }
 
-bool Matrix::identidade()
+bool Matrix::identity()
 {
     if(square())
     {
-
         for(int i = 0; i < rows; i++)
         {
             for(int j = 0; j < columns; j++)
             {
-                if(i != j && vet_matrix[i][j] != 0 || i == j && vet_matrix[i][j] != 1)
+                if(i != j && _matrix[i][j] != 0 || i == j && _matrix[i][j] != 1)
                     return false;
             }
         }
-
         return true;
     }
 }
 
-bool Matrix::igual(Matrix &b)
+bool Matrix::equal(Matrix &b)
 {
     if(equal_dimensions(b))
     {
@@ -203,7 +196,7 @@ bool Matrix::igual(Matrix &b)
         {
             for(int j = 0; j < columns; j++)
             {
-                if(vet_matrix[i][j] != b.getElement(i,j))
+                if(_matrix[i][j] != b.getElement(i,j))
                     return false;
             }
         }
@@ -212,7 +205,7 @@ bool Matrix::igual(Matrix &b)
     return false;
 }
 
-bool Matrix::permutacao()
+bool Matrix::permutation()
 {
     Matrix a(rows, columns);
     Matrix t(rows, columns);
@@ -221,14 +214,14 @@ bool Matrix::permutacao()
     {
         for(int j = 0; j < columns; j++)
         {
-            a.set(i, j, vet_matrix[i][j]);
+            a.set(i, j, _matrix[i][j]);
         }
     }
     for(int i = 0; i < columns; i++)
     {
         for(int j = 0; j < rows; j++)
         {
-            t.set(i,j,vet_matrix[j][i]);
+            t.set(i,j,_matrix[j][i]);
         }
     }
     for(int i = 0; i < rows; i++)
@@ -237,11 +230,11 @@ bool Matrix::permutacao()
         {
             if(i == j)
             {
-                iden.set(i, j, vet_matrix[i][j] = 1);
+                iden.set(i, j, _matrix[i][j] = 1);
             }
             else
             {
-                iden.set(i, j, vet_matrix[i][j] = 0);
+                iden.set(i, j, _matrix[i][j] = 0);
             }
         }
     }
@@ -254,7 +247,7 @@ bool Matrix::permutacao()
         return false;
     }
 }
-bool Matrix::ortogonal()
+bool Matrix::orthogonal()
 {
     Matrix a(rows, columns);
     Matrix t(rows, columns);
@@ -263,14 +256,14 @@ bool Matrix::ortogonal()
     {
         for(int j = 0; j < columns; j++)
         {
-            a.set(i, j, vet_matrix[i][j]);
+            a.set(i, j, _matrix[i][j]);
         }
     }
     for(int i = 0; i < columns; i++)
     {
         for(int j = 0; j < rows; j++)
         {
-            t.set(i,j,vet_matrix[j][i]);
+            t.set(i,j,_matrix[j][i]);
         }
     }
     for(int i = 0; i < rows; i++)
@@ -279,11 +272,11 @@ bool Matrix::ortogonal()
         {
             if(i == j)
             {
-                iden.set(i, j, vet_matrix[i][j] = 1);
+                iden.set(i, j, _matrix[i][j] = 1);
             }
             else
             {
-                iden.set(i, j, vet_matrix[i][j] = 0);
+                iden.set(i, j, _matrix[i][j] = 0);
             }
         }
     }
@@ -298,32 +291,33 @@ bool Matrix::ortogonal()
 }
 
 
-int Matrix::potencia(int x)
+int Matrix::power(int x)
 {
     if(square())
     {
-        Matrix c(rows, columns());
+        Matrix c(rows, columns);
+        Matrix a(rows, columns);
         int value = 0;
-
         for(int i = 0; i < rows; i++)
         {
             for(int j = 0; j < columns; j++)
             {
-                for(int k = 0; k < columns; k++)
-                {
-                    value += vet_matrix[i][k] * vet_matrix[k][j];
-
-                }
-                c.set(i, j, value);
-                value = 0;
-                for(int l = 1; l < 100; l++)
-                {
-                    c.set(i, j, vet_matrix[i][j] * c.getElement(j,i));
-                }
-
+                c.set(i, j, _matrix[i][j]);
+                a.set(i, j, _matrix[i][j]);
             }
         }
-        x=c+c;
+        for(int p = 1; p < x; p++)
+        {
+            c=c*a;
+        }
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < columns; j++)
+            {
+                value= value + c.getElement(i, j);
+            }
+        }
+        return value;
     }
         throw std::string("\nNao eh possivel fazer a potencia.\n");
 }
